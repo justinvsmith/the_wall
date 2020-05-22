@@ -1,0 +1,80 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.header {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.left, .right {
+    display: inline-block;
+}
+
+.left{ 
+    margin-top: 5px;
+}
+
+.right {
+    width: 200px;
+    margin-top: 10px;
+}
+
+.right h6, .right a{
+    display: inline-block;
+}
+
+.right h6 {
+    margin-right: 45px;
+}
+
+.right a{
+    vertical-align: top;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 20px auto;
+    display: flex; 
+}
+
+.center {
+    margin: auto;
+}
+.wrapper textarea {
+    margin: auto;
+    border: 2px solid #000000;
+}
+
+.wrapper label {
+    font-size: 1.5em;
+}
+
+button{ 
+    margin-top: 10px;
+    justify-self: end;
+    box-shadow: 3px 3px 2px #000000;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+ul > ul{
+    margin-left: 20px;
+}
+
+
+p {
+    font-size: 1.3em;
+    font-weight: 200;
+}
+
+.formed {
+    height: 270px;
+    margin-bottom: 30px;
+}

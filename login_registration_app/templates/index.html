@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="left">
+            <h2>Registration</h2>
+            {% if messages %}
+        <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+        </ul>
+        {% endif %}
+            <form action="/reg_user" method="post">
+                {% csrf_token %}
+                <div class="row form-group">
+                    {% for message in messages %}
+                        {% if message.extra_tags == "first_name" %}
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7">
+                            <span class="text-danger">{{message}}</span>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    <label class="col-md-4" for="first_name">First Name</label>
+                    <input class="col-md-7" type="text" id="first_name" name="first_name">
+                </div>
+                <div class="row form-group">
+                    {% for message in messages %}
+                        {% if message.extra_tags == "last_name" %}
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7">
+                            <span class="text-danger">{{message}}</span>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    <label class="col-md-4" for="last_name">Last Name</label>
+                    <input class="col-md-7" type="text" id="last_name" name="last_name">
+                </div>
+                <div class="row form-group">
+                    {% for message in messages %}
+                        {% if message.extra_tags == "email" %}
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7">
+                            <span class="text-danger">{{message}}</span>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    <label class="col-md-4" for="email">Email</label>
+                    <input class="col-md-7" type="text" id="email" name="email">
+                </div>
+                <div class="row form-group">
+                    {% for message in messages %}
+                        {% if message.extra_tags == "password" %}
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7">
+                            <span class="text-danger">{{message}}</span>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    <label class="col-md-4" for="password">Password</label>
+                    <input class="col-md-7" type="password" id="password" name="password">
+                </div>
+                <div class="row form-group">
+                    {% for message in messages %}
+                        {% if message.extra_tags == "confirmed" %}
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7">
+                            <span class="text-danger">{{message}}</span>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    <label class="col-md-4" for="confirmed">Confirm PW</label>
+                    <input class="col-md-7" type="password" id="confirmed" name="confirmed">
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-4" for="birthdate">Birthdate</label>
+                    <input class="col-md-7" type="date" id="birthdate" name="birthdate" value='2020-01-01'>
+                </div>
+                <label class="col-md-2"> </label>
+                <button class="btn btn-primary" type="submit">Register</button>
+            </form>            
+        </div>
+        <div class="right">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                {% csrf_token %}
+                <div class="row form-group">
+                    <label class="col-md-4" for="email_log">Email</label>
+                    <input class="col-md-5" type="text" id="email_log" name="email_log">
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-4" for="password_log">Password</label>
+                    <input class="col-md-5" type="password" id="password_log" name="password_log">
+                </div>
+                <label class="col-md-4"> </label>
+                <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

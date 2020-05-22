@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wall</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/wall_app.css' %}">
+    <script src="{% static 'js/wall.js' %}"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="left">
+            <h3>CodingDojo Wall</h3>
+        </div>
+        <div class="right">
+            <h6>Hello {{an_user.first_name}}!</h6>
+            <a href="/logout">log off</a>
+        </div>
+    </div>
+    <div class="wrapper container">
+        <form action="/wall/new_msg" method="post">
+            {% csrf_token %}
+            <div class="row"> 
+                <label for="post">Post a Message</label><br>
+            </div>
+            <div class="center">
+                <textarea class="form-control form-control-sm" name="message" id="post" cols="130" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="id" value="{{number}}">
+            <button class="btn btn-primary float-right" type="submit">Post a message</button>
+            </div>
+        </form>
+    </div>
+    <div class="main container">
+        {% for post in messages%}
+        <ul>
+            <li><h2>{{post.user.first_name}} {{post.user.last_name}} - {{post.created_at.date}}</h2></li>
+            <li><p class="message">{{post.message}}</p></li>
+            <ul>
+            {% for message in post.comments.all %}
+                <li><h4>{{message.user.first_name}} {{message.user.last_name}} - {{message.created_at.date}}</h4></li>
+                <li><p>{{message.comment}}</p></li>
+            {% endfor %}
+                <li class="formed">
+                    <form action="/wall/new_comment" method="POST">
+                        {% csrf_token %}
+                        <div class="center">
+                            <textarea class="form-control form-control-sm" name="comment" cols="130" rows="10"></textarea>
+                        </div>
+                    <div class="form-group">
+                        <input type="hidden" name="noise" value="{{post.id}}">
+                    <button class="btn btn-primary float-right" type="submit">Post a comment</button>
+                    </div>
+                    </form>
+                </li>
+            </ul>
+        </ul>
+        {% endfor %}
+    </div>
+</body>
+</html>

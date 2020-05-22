@@ -1,0 +1,21 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.left, .right {
+    display: inline-block;
+}
+
+button {
+    display: inline-block;
+    margin: auto;
+    text-align: center;
+}
